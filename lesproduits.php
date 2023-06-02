@@ -7,7 +7,7 @@ function getProducts()
         "DOG" => [
             'nom' => "Dog",
             'prixTTC' => 300000,
-            'weight' => 3000,
+            'weight' => 7000,
             'remise' => 3000,
             'image' => "http://localhost/Module1/image/dog.png"
         ],
@@ -26,7 +26,7 @@ function getProducts()
         "CAT" => [
             'nom' => "chat",
             'prixTTC' => 170000,
-            'weight' => 1000,
+            'weight' => 3000,
             'remise' => 30000,
             'image' => "http://localhost/Module1/image/cat.png"
 
@@ -48,33 +48,25 @@ function getProduct($key)
 }
 
 
-// $lesproduits = [
 
-//     'Dog' => [
-//          'nom' => "Dog",
-//          'prixTTC' => 30000,
-//          'weight' => 3000,
-//          'remise' => 300,
-//          'image' => "http://localhost/Module1/image/dog.png"
-//      ],
- 
-//      'Cocinelle' => [
- 
- 
-//          'nom' => "cocinelle",
-//          'prixTTC' => 3000,
-//          'weight' => 3,
-//          'remise' => 30,
-//          'image' => "http://localhost/Module1/image/coci.png"
- 
-//      ],
- 
-//      'Chat'=> [
-//          'nom' => "chat",
-//          'prixTTC' => 30000,
-//          'weight' => 1000,
-//          'remise' => 300,
-//          'image' => "http://localhost/Module1/image/cat.png"
- 
-//     ],
-//  ];
+
+function getTransporteur (){
+   
+
+return [
+
+    "Chronopost" => [
+        '1' => 5,
+        '2' => 12,
+        '3' => 0
+        
+    ],
+    "Poste" =>   [
+        '1' => 3,
+        '2'=> 51,
+        '3' => 14
+
+    ]
+    ];
+    
+}

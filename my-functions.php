@@ -31,5 +31,5 @@ function discountedPrice($prixTTC, $remise){
 /*echo discountedPrice(3000, 300) . "<br>";
 echo formatPrice( discountedPrice(3000,300)) . "<br>";*/
 
-
+// function prixFDP ()
 ?>
