@@ -4,7 +4,7 @@
 
 function formatPrice($prixEnCentimes) {
     $prixEnEuros = number_format($prixEnCentimes / 100, 2, '.', ' ');
-    echo $prixEnEuros . '€' . "<br>";
+    echo $prixEnEuros . '€';
 }
 
 // Pour l'afficher =>      formatPrice (1000);

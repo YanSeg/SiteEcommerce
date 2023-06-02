@@ -5,14 +5,18 @@ include  "my-functions.php";
 include "lesproduits.php";
 
 $quantite = $_POST['quantite'];  //$_POST ,ou get, est une variable globale qui permet de recupérer tout ce qui passe, par l url pour Get, ou par php en POST
+$key = $_POST ['product'];
 
-$prixTTC = $_POST['prixTTC'];
 
+echo "la quantite est de" .$quantite;
 
+$product= getProduct($key);
+
+$priHTquanti = $product['prixTTC']*$quantite;
 
 ?>
 
-<!-- 
+
 <div class="container">
 <h1>Récapitulatif d'achat</h1>
 <div class="card">
@@ -20,18 +24,19 @@ $prixTTC = $_POST['prixTTC'];
     Produit
   </div>
   <div class="card-body">
-    <h5 class="card-title"> <?php echo $nom ?></h5>
+    <h5 class="card-title"> <?php echo $product['nom'] ?></h5>
     <p class="card-text">Quantité  commandé   :  <strong> <?php echo $quantite ?> </strong></p>
-    <p class="card-text">Prix unitaire TTC  : <?php echo $prixTTC ?> Prix unitaire avec remise <strong> <?php echo $prixRemise ?></strong> </p>
-    <p class="card-text">Total HT : <?php echo $prixHT*$quantite ?></p>
-    <p class="card-text">Prix avec remise  : <?php echo$prixRemise ?></p>
-    <p class="card-text">Prix TTC : 99,99 €</p>
+    <p class="card-text">Prix unitaire TTC  : <?php echo formatPrice($product['prixTTC'])?><br> Prix unitaire TTC avec remise <strong> <?php formatPrice(discountedPrice($product['prixTTC'], $product['remise']))?></strong> </p>
+    <p class="card-text">Total HT : <?php echo formatPrice(priceExcludingVAT($priHTquanti)) ?></p>
+    <p class="card-text">Total TTC : <?php echo formatPrice($product['prixTTC']*$quantite)?></p>
+    <br>
+    <p class="card-text">Prix Final TTC avec une remise de (<?php  echo  formatPrice( $product['remise']) ?> ) : <br> <strong> <?php echo formatPrice($priHTquanti-($product['remise'])) ?></p> 
   </div>
   <div class="card-footer text-muted">
-    Date d'achat : 01/06/2023
+  <input type="date" value="<?php echo date('Y-m-d'); ?>">
   </div>
 </div>
-</div> -->
+</div>
 
 
 <?php
