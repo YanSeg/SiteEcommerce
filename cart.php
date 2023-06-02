@@ -13,6 +13,8 @@ echo "la quantite est de" .$quantite;
 $product= getProduct($key);
 
 $priHTquanti = $product['prixTTC']*$quantite;
+$totalRemise=   $product['remise']*$quantite;
+
 
 ?>
 
@@ -30,7 +32,7 @@ $priHTquanti = $product['prixTTC']*$quantite;
     <p class="card-text">Total HT : <?php echo formatPrice(priceExcludingVAT($priHTquanti)) ?></p>
     <p class="card-text">Total TTC : <?php echo formatPrice($product['prixTTC']*$quantite)?></p>
     <br>
-    <p class="card-text">Prix Final TTC avec une remise de (<?php  echo  formatPrice( $product['remise']) ?> ) : <br> <strong> <?php echo formatPrice($priHTquanti-($product['remise'])) ?></p> 
+    <p class="card-text">Prix Final TTC avec une remise de (<?php  echo  formatPrice( $totalRemise) ?> ) : <br> <strong> <?php echo formatPrice($priHTquanti-$totalRemise) ?></p> 
   </div>
   <div class="card-footer text-muted">
   <input type="date" value="<?php echo date('Y-m-d'); ?>">
