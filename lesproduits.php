@@ -50,23 +50,34 @@ function getProduct($key)
 
 
 
-function getTransporteur (){
-   
+function getTransporteurs()
+{
+    return [
 
-return [
+        "Chronopost" => [
+            '1' => 1545,
+            '2' => 3000,
+            '3' => 0
 
-    "Chronopost" => [
-        '1' => 5,
-        '2' => 12,
-        '3' => 0
-        
-    ],
-    "Poste" =>   [
-        '1' => 3,
-        '2'=> 51,
-        '3' => 14
+        ],
+        "Poste" =>   [
+            '1' => 300,
+            '2' => 510,
+            '3' => 10000
 
-    ]
+        ]
     ];
-    
 }
+
+
+function getTransporteur($key){
+    $transpo = getTransporteurs();
+
+    if (!isset($transpo[$key])) {
+        throw new Exception("Le produit $key n'existe pas");
+    }
+
+    return $transpo[$key];
+
+}
+

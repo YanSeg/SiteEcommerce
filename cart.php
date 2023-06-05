@@ -15,18 +15,53 @@ $product = getProduct($key);
 $priHTquanti = $product['prixTTC'] * $quantite;
 
 $totalRemise =   $product['remise'] * $quantite;
+
 echo "<br>";
+
 $poidTotalCommande = $product['weight'] * $quantite;
+
 echo "<br>";
-echo $poidTotalCommande;
+
+echo "poid total de la commande " . $poidTotalCommande . "g <br>";
 
 
-// echo "<br>";
-// $chrono = $_POST['chrono'];
-// echo "<br>";
-// echo $chrono;
+if (isset($_POST['choixtranspo'])) {
+  $valeurSelectionnee = $_POST['choixtranspo'];
+  echo  $valeurSelectionnee;
+}
 
-// $section= $_POST['selection'];
+
+if (isset($valeurSelectionnee)) {
+  if ($valeurSelectionnee == "Chronopost") {
+    $transpo = (getTransporteur($valeurSelectionnee));
+    print_r(getTransporteur($valeurSelectionnee));
+  } elseif ($valeurSelectionnee == "Poste") {
+    $transpo = (getTransporteur($valeurSelectionnee));
+    var_dump(getTransporteur($valeurSelectionnee));
+  } else {
+  }
+}
+
+
+
+
+
+
+if (isset($valeurSelectionnee)) {
+  if ($valeurSelectionnee == "Chronopost") {
+    $transpo = getTransporteur($valeurSelectionnee);
+
+    echo  formatPrice($transpo['1']) . "   de frais de port de 0 à 500g  <br>";
+    echo  formatPrice($transpo['2']) . "   de frais de port  de 500g à 2kg <br>";
+    echo  formatPrice($transpo['3']) . "   de frais de port pour tout colis supérieur à 2Kg <br>";
+  } elseif ($valeurSelectionnee == "Poste") {
+    $transpo = (getTransporteur($valeurSelectionnee));
+    echo  formatPrice($transpo['1']) . "   de frais de port de 0 à 500g <br>";
+    echo  formatPrice($transpo['2']) . "   de frais de port  de 500g à 2kg <br>";
+    echo  formatPrice($transpo['3']) . "   de frais de port pour tout colis supérieur à 2Kg <br>";
+  } else {
+  }
+}
 
 ?>
 
@@ -40,12 +75,13 @@ echo $poidTotalCommande;
     <form action="cart.php" method="POST">
       <div class="card-body">
         <h5 class="card-title"> <?php echo $product['nom'] ?></h5>
-        <p class="card-text">Quantité commandé : 
-          <strong> 
-          <input type="number" class="form-control" name="quantite" value="<?php echo $quantite ?>" min="1" max="100">
-        </strong></p>
+        <p class="card-text">Quantité commandé :
+          <strong>
+            <input type="number" class="form-control" name="quantite" value="<?php echo $quantite ?>" min="1" max="100">
+          </strong>
+        </p>
         <input type="hidden" name="product" value="<?php echo $key ?>">
-
+       
         <button class="btn btn-primary">Mettre à jour le panier</button>
         <p class="card-text">Prix unitaire TTC : <?php echo formatPrice($product['prixTTC']) ?><br> Prix unitaire TTC avec remise <strong> <?php formatPrice(discountedPrice($product['prixTTC'], $product['remise'])) ?></strong> </p>
         <p class="card-text">Total HT : <?php echo formatPrice(priceExcludingVAT($priHTquanti)) ?></p>
@@ -57,31 +93,50 @@ echo $poidTotalCommande;
         <input type="date" value="<?php echo date('Y-m-d'); ?>">
       </div>
   </div>
-  </form>
+  <!-- </form> -->
   <div class="card">
     <div class="card-header">
       Choix du transporteur
     </div>
+    </form>
+    <!-- <form action="cart.php" method="POST"> -->
 
     <form action="cart.php" method="POST">
+    <div>
+      <div class="card-text">
 
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <select id="oCategorie" name="oCategorie" class="form-control">
-            <option> Veuillez sélectionner votre transporteur</option>
+        <select name="choixtranspo" class="form-control">
+        <option value="">Sélectionner un transporteur pour finaliser l'achat</option>
+          <option value="Chronopost">chrono</option>
+          <option value="Poste">poste</option>
+        </select>
 
-            <option value="chrono">chrono</option>
-            <option value="poste">poste</option>
-          </select>
-
-
-        </div>
-        <input type="hidden" name="product" value="<?php echo $key  ?>">
-        <input type="hidden" class="form-control" name="quantite" value="<?php echo $quantite ?>" min="1" max="100">
-       
-
-        <button class="btn btn-primary" type="submit"> Valider </button>
       </div>
+
+      <div class="card-body">
+
+        <h5 class="card-title"> Vous avez sélectionné : <?php nomTranspo() ?></h5>
+
+        <p class="card-text">Quantité commandé :
+
+          <input type="number" class="form-control" name="quantite" value="<?php echo $quantite ?>" min="1" max="100">
+
+        </p>
+        <input type="hidden" name="product" value="<?php echo $key ?>">
+
+        <button class="btn btn-primary">Valider le transporteur</button>
+
+
+      </div>
+  <div>
+  <div> <?php if (isset($valeurSelectionnee)){AffichageTarifs($valeurSelectionnee);} ?> <Br></div>
+   <p> Le coute de transport est de :  <?php if (isset($transpo)){ PrixfinalTranspoPoid ($transpo, $poidTotalCommande);} ?> <p> 
+  
+  </div>
+
+
+      <button class="btn btn-primary" type="submit" value="Envoyer"> Valider </button>
+    </div>
   </div>
 
   </form>

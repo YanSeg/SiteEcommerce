@@ -28,8 +28,50 @@ function discountedPrice($prixTTC, $remise){
     return $montantRemise;
 }
 
-/*echo discountedPrice(3000, 300) . "<br>";
-echo formatPrice( discountedPrice(3000,300)) . "<br>";*/
 
-// function prixFDP ()
-?>
+function nomTranspo (){
+    if (isset($_POST['choixtranspo'])) {
+      $valeurSelectionnee = $_POST['choixtranspo'];
+      echo  $valeurSelectionnee;
+   
+    }
+}
+
+function AffichageTarifs($valeurSelectionnee){
+    if (isset($valeurSelectionnee))   {
+        if ($valeurSelectionnee == "Chronopost") {
+          $transpo = getTransporteur($valeurSelectionnee);
+    
+          echo  formatPrice($transpo['1']) . "   de frais de port de 0 à 500g  <br>";
+          echo  formatPrice($transpo['2']) . "   de frais de port  de 500g à 2kg <br>";
+          echo  formatPrice($transpo['3']) . "   de frais de port pour tout colis supérieur à 2Kg <br>";
+        } elseif ($valeurSelectionnee == "Poste") {
+          $transpo = (getTransporteur($valeurSelectionnee));
+          echo  formatPrice($transpo['1']) . "   de frais de port de 0 à 500g <br>";
+          echo  formatPrice($transpo['2']) . "   de frais de port  de 500g à 2kg <br>";
+          echo  formatPrice($transpo['3']) . "   de frais de port pour tout colis supérieur à 2Kg <br>";
+        } else {
+        }
+      }
+    }
+    
+    
+
+
+function prixfinalTranspoPoid($transpo, $poidTotalCommande)
+{
+
+  if (isset($transpo)) {
+    if ($poidTotalCommande <= 500) {
+      $prixFinalTranspo = $transpo['1'];
+      echo  formatPrice($prixFinalTranspo);
+    } elseif ($poidTotalCommande <= 2000) {
+      $prixFinalTranspo =  $transpo['2'];
+      echo  formatPrice($poidTotalCommande);
+    } elseif ($poidTotalCommande > 2000) {
+      $prixFinalTranspo = $transpo['3'];
+      echo  formatPrice($poidTotalCommande);
+    }
+  }
+}
+
