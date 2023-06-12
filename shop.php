@@ -1,13 +1,34 @@
 <?php
 
 
+
 include  "template/header.php";
 include  "my-functions.php";
 include "lesproduits.php";
 
-$products = getProducts();
+// $products = getProducts();
 
-var_dump($products);
+// var_dump($products);
+
+
+// function GetTable($db, $prdot){
+//     $fonct = $db->prepare($prdot);
+//     $fonct->execute();
+//     $fonct = $fonct->fetchAll();
+//     return $fonct;
+//     }
+    
+// $prod="SELECT * FROM products";
+// $produits = GetTable($db, $prod);
+
+// var_dump($produits);
+
+
+// foreach ( $produits as $produits ){
+//     print_r($produits['nom']);
+//     print_r($produits['idproducts']);
+// }
+
 
 
 ?>
@@ -17,14 +38,14 @@ var_dump($products);
 <div class="grid">
 
     <?php
-    foreach ($products as $key => $produit) :   ?>
+    foreach ( $produits as $key=>  $produit ) :  ?>
 
 
         <div class="produit">
 
-            <h3> <?php echo $produit['nom'] ?> </h3>
+            <h3> <?php echo ($produit['nom']) ?> </h3>
 
-            <p> Prix initiale HT: <?php echo formatPrice(priceExcludingVAT($produit['prixTTC'])) ?> </p>
+            <p>  <?php echo $key ?> $key; Prix initiale HT: <?php echo formatPrice(priceExcludingVAT($produit['prixTTC'])) ?> </p>
 
 
             <p> Prix initiale TTC : <?php echo formatPrice($produit['prixTTC']) ?> </p>

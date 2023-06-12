@@ -1,5 +1,6 @@
 <?php
 
+
 include  "template/header.php";
 include  "my-functions.php";
 include "lesproduits.php";
@@ -8,21 +9,31 @@ $quantite = $_POST['quantite'];  //$_POST ,ou get, est une variable globale qui 
 $key = $_POST['product'];
 
 
-echo "la quantite est de" . $quantite;
+echo "la quantite est de " . $quantite;
+"<br>";
+echo "la valeur de key est de  " . $key;
+// $product = getProduct($key);
 
-$product = getProduct($key);
 
-$priHTquanti = $product['prixTTC'] * $quantite;
+if ($quantite>0){
+  $sqlQuery = "INSERT INTO test (quantity) VALUES ($quantite) ";
+  GetTable($db, $sqlQuery);
+}
 
-$totalRemise =   $product['remise'] * $quantite;
+// var_dump($produits);
 
-echo "<br>";
 
-$poidTotalCommande = $product['weight'] * $quantite;
+// $priHTquanti = $product['prixTTC'] * $quantite;
 
-echo "<br>";
+// $totalRemise =   $product['remise'] * $quantite;
 
-echo "poid total de la commande " . $poidTotalCommande . "g <br>";
+// echo "<br>";
+
+// $poidTotalCommande = $product['weight'] * $quantite;
+
+// echo "<br>";
+
+// echo "poid total de la commande " . $poidTotalCommande . "g <br>";
 
 
 if (isset($_POST['choixtranspo'])) {
@@ -41,10 +52,6 @@ if (isset($valeurSelectionnee)) {
   } else {
   }
 }
-
-
-
-
 
 
 if (isset($valeurSelectionnee)) {
@@ -72,8 +79,10 @@ if (isset($valeurSelectionnee)) {
     <div class="card-header">
       Produit
     </div>
+    
     <form action="cart.php" method="POST">
       <div class="card-body">
+        
         <h5 class="card-title"> <?php echo $product['nom'] ?></h5>
         <p class="card-text">Quantité commandé :
           <strong>
