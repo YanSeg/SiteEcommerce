@@ -9,7 +9,7 @@ function getProducts()
             'prixTTC' => 300000,
             'weight' => 7000,
             'remise' => 3000,
-            'image' => "http://localhost/Module1/image/dog.png"
+            'image' => "http://localhost/SiteECommerce/image/dog.png"
         ],
 
         "COC" => [
@@ -19,7 +19,7 @@ function getProducts()
             'prixTTC' => 3000,
             'weight' => 3,
             'remise' => 300,
-            'image' => "http://localhost/Module1/image/coci.png"
+            'image' => "http://localhost/SiteECommerce/image/coci.png"
 
         ],
 
@@ -28,7 +28,7 @@ function getProducts()
             'prixTTC' => 170000,
             'weight' => 3000,
             'remise' => 30000,
-            'image' => "http://localhost/Module1/image/cat.png"
+            'image' => "http://localhost/SiteECommerce/image/cat.png"
 
         ]
     ];

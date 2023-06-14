@@ -80,21 +80,24 @@ function prixfinalTranspoPoid($transpo, $poidTotalCommande)
 // _____________________________________ Utilisation de la BDD
 
 try {
-  $db = new PDO('mysql:host=localhost;dbname=catalogEcommerce;charset=utf8', 'MAESTRO', 'MAESTRO//1234');
+  $db = new PDO('mysql:host=localhost;dbname=bddecommerce;charset=utf8', 'MAESTRO', 'MAESTRO//1234');
 } catch (Exception $e) {
   die('Erreur : ' . $e->getMessage());
 }
 
-
-
-function GetTable($db, $prdot){
-  $fonct = $db->prepare($prdot);
+function GetTableBdd($db, $sqlquery){
+  $fonct = $db->prepare($sqlquery);
   $fonct->execute();
-  $fonct = $fonct->fetchAll();
+  $fonct = $fonct->fetchAll(PDO::FETCH_ASSOC);
+  // $fonct = $fonct->fetchAll();
   return $fonct;
   }
   
-$prod="SELECT * FROM products";
-$produits = GetTable($db, $prod);
 
-var_dump($produits);
+  $sqlquery_products = "SELECT * FROM products";
+
+$sqlquery_transporters = "SELECT * FROM transporters";
+
+
+
+

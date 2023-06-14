@@ -2,9 +2,9 @@
 
 
 
-include  "template/header.php";
-include  "my-functions.php";
-include "lesproduits.php";
+require_once  "template/header.php";
+require_once  "my-functions.php";
+// require_once "lesproduits.php";
 
 // $products = getProducts();
 
@@ -31,57 +31,72 @@ include "lesproduits.php";
 
 
 
+
+
+$produits = GetTableBdd($db, $sqlquery_products);
+
+var_dump($produits);
+
+
+
 ?>
-
-
-
+<form action="cart.php" method="POST">
 <div class="grid">
 
     <?php
-    foreach ( $produits as $key=>  $produit ) :  ?>
+    foreach ( $produits as $key => $product ) :  ?>
 
 
         <div class="produit">
 
-            <h3> <?php echo ($produit['nom']) ?> </h3>
+            <h3> <?php echo ($product['name']) ?> </h3>
 
-            <p>  <?php echo $key ?> $key; Prix initiale HT: <?php echo formatPrice(priceExcludingVAT($produit['prixTTC'])) ?> </p>
+            <p>  <?php echo $key ?>Prix initiale HT: <?php echo formatPrice(priceExcludingVAT($product['price'])) ?> </p>
 
 
-            <p> Prix initiale TTC : <?php echo formatPrice($produit['prixTTC']) ?> </p>
+          
+
+            <p> Prix initiale TTC : <?php echo formatPrice($product['price']) ?> </p>
             <p>
-                <strong>Remise étrange de <?php echo  formatPrice($produit['remise']) ?></strong>
+                <strong>Remise étrange de <?php echo  formatPrice($product['delivery']) ?></strong>
             </p>
 
-            <p> Prix Final après remise : <?php echo  formatPrice(discountedPrice($produit['prixTTC'], $produit['remise'])) ?> </p>
+            <p> Prix Final après remise : <?php echo  formatPrice(discountedPrice($product['price'], $product['delivery'])) ?> </p>
 
 
-            <img src="<?php echo $produit['image'] ?>">
+            <img src="<?php echo $product['image_url'] ?>">
 
-            <form action="cart.php" method="POST">
+            
 
                 <div class="form-group">
                     <label for="quantite">Quantité :</label>
-                    <input type="number" min="0" max="100" class="form-control" id="quantite" name="quantite" placeholder="Entrez la quantité">
+                    <input type="number" min="0" max="100" class="form-control" id="quantite" name="quantite[]" placeholder="Entrez la quantité">
                 </div>
 
                 <div class="boutoncommande">
                     <button class="btn btn-primary"> Ajouter au panier</button>
                 </div>
-                <input type="hidden" name="product" value="<?=  $key ?>">
+                <input type="hidden" name="product" value="<?= $key?>">
 
-                <!-- <input type="hidden" type=number name="prixHT" id="prixHT" value="<?php echo formatPrice(priceExcludingVAT($produit['prixTTC'])) ?>">
-                <input type="hidden" type=number name="prixTTC" id="prixTTC" value="<?php $produit['prixTTC'] ?>">
-                <input type="hidden" type=texte name="prixRemise" id="prixRemise" value="<?php echo  formatPrice(discountedPrice($produit['prixTTC'], $produit['remise'])) ?>"> -->
+                <!-- <input type="hidden" type=number name="prixHT" id="prixHT" value="<?php echo formatPrice(priceExcludingVAT($product['prixTTC'])) ?>">
+                <input type="hidden" type=number name="prixTTC" id="prixTTC" value="<?php $product['prixTTC'] ?>">
+                <input type="hidden" type=texte name="prixRemise" id="prixRemise" value="<?php echo  formatPrice(discountedPrice($product['prixTTC'], $product['remise'])) ?>"> -->
 
-            </form>
+           
         </div>
     <?php endforeach;
     ?>
+     </form>
+      <h3> DEBUG </h3>
+      <?php var_dump ($key); ?>
 </div>
 
 
 
 <?php
+
+$affichageTranspo = GetTableBdd($db, $sqlquery_transporters);
+var_dump($affichageTranspo);
+
 include  "template/footer.php";
 ?>
