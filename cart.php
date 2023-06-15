@@ -4,10 +4,22 @@
 require_once  "template/header.php";
 require_once  "my-functions.php";
 require_once "lesproduits.php";
+require_once "class/classdatabase.php";
+
 
 $quantite = $_POST['quantite'];  //$_POST ,ou get, est une variable globale qui permet de recupérer tout ce qui passe, par l url pour Get, ou par php en POST
 $product = $_POST['product'];
+if (isset ($_POST ['date'])){ 
+  $date = $_POST ['date'];
+}
 
+$db = new db;
+$sqlquery_products = "SELECT * FROM products";
+$produits =$db->GetTableBdd($sqlquery_products);
+
+
+
+$affichageTranspo = $db->GetTableBdd($sqlquery_transporters);
 
 
 echo "debug ";
@@ -17,19 +29,22 @@ echo "<br>";
 
 
 
+echo "---------------------------------------------------------------------";
 
-$produits = GetTableBdd($db, $sqlquery_products);
-
+echo "---------------------------------------------------------------------";
 var_dump($produits);
-
-
+echo "---------------------------------------------------------------------";
 var_dump($produits[$product]);
+echo "---------------------------------------------------------------------";
 
 
-
-echo "la quantite est de " . var_dump($quantite);
-"<br>";
+echo "---------------------------------------------------------------------";
+echo "<br>";
+echo "la quantite est de " . $quantite;
+echo "<br>";
 echo "la valeur de product est de  " . $product;
+echo "<br>";
+echo "---------------------------------------------------------------------";
 // $product = getProduct($key);
 
 
@@ -41,9 +56,9 @@ echo "la valeur de product est de  " . $product;
 // var_dump($produits);
 
 
-// $priHTquanti = $produits[$product]['price'] * $quantite;
+$priHTquanti = $produits[$product]['price'] * $quantite;
 
-// $totalRemise =   $produits[$product]['delivery'] * $quantite;
+$totalRemise =   $produits[$product]['delivery'] * $quantite;
 
 // echo "<br>";
 
@@ -54,39 +69,39 @@ echo "la valeur de product est de  " . $product;
 // echo "poid total de la commande " . $poidTotalCommande . "g <br>";
 
 
-// if (isset($_POST['choixtranspo'])) {
-//   $valeurSelectionnee = $_POST['choixtranspo'];
-//   echo  $valeurSelectionnee;
-// }
+if (isset($_POST['choixtranspo'])) {
+  $valeurSelectionnee = $_POST['choixtranspo'];
+  echo  $valeurSelectionnee;
+}
 
 
-// if (isset($valeurSelectionnee)) {
-//   if ($valeurSelectionnee == "Chronopost") {
-//     $transpo = (getTransporteur($valeurSelectionnee));
-//     print_r(getTransporteur($valeurSelectionnee));
-//   } elseif ($valeurSelectionnee == "Poste") {
-//     $transpo = (getTransporteur($valeurSelectionnee));
-//     var_dump(getTransporteur($valeurSelectionnee));
-//   } else {
-//   }
-// }
+if (isset($valeurSelectionnee)) {
+  if ($valeurSelectionnee == "Chronopost") {
+    $transpo = (getTransporteur($valeurSelectionnee));
+    print_r(getTransporteur($valeurSelectionnee));
+  } elseif ($valeurSelectionnee == "Poste") {
+    $transpo = (getTransporteur($valeurSelectionnee));
+    var_dump(getTransporteur($valeurSelectionnee));
+  } else {
+  }
+}
 
 
-// if (isset($valeurSelectionnee)) {
-//   if ($valeurSelectionnee == "Chronopost") {
-//     $transpo = getTransporteur($valeurSelectionnee);
+if (isset($valeurSelectionnee)) {
+  if ($valeurSelectionnee == "Chronopost") {
+    $transpo = getTransporteur($valeurSelectionnee);
 
-//     echo  formatPrice($transpo['1']) . "   de frais de port de 0 à 500g  <br>";
-//     echo  formatPrice($transpo['2']) . "   de frais de port  de 500g à 2kg <br>";
-//     echo  formatPrice($transpo['3']) . "   de frais de port pour tout colis supérieur à 2Kg <br>";
-//   } elseif ($valeurSelectionnee == "Poste") {
-//     $transpo = (getTransporteur($valeurSelectionnee));
-//     echo  formatPrice($transpo['1']) . "   de frais de port de 0 à 500g <br>";
-//     echo  formatPrice($transpo['2']) . "   de frais de port  de 500g à 2kg <br>";
-//     echo  formatPrice($transpo['3']) . "   de frais de port pour tout colis supérieur à 2Kg <br>";
-//   } else {
-//   }
-// }
+    echo  formatPrice($transpo['1']) . "   de frais de port de 0 à 500g  <br>";
+    echo  formatPrice($transpo['2']) . "   de frais de port  de 500g à 2kg <br>";
+    echo  formatPrice($transpo['3']) . "   de frais de port pour tout colis supérieur à 2Kg <br>";
+  } elseif ($valeurSelectionnee == "Poste") {
+    $transpo = (getTransporteur($valeurSelectionnee));
+    echo  formatPrice($transpo['1']) . "   de frais de port de 0 à 500g <br>";
+    echo  formatPrice($transpo['2']) . "   de frais de port  de 500g à 2kg <br>";
+    echo  formatPrice($transpo['3']) . "   de frais de port pour tout colis supérieur à 2Kg <br>";
+  } else {
+  }
+}
 
 ?>
 
@@ -117,9 +132,7 @@ echo "la valeur de product est de  " . $product;
         <br>
         <p class="card-text">Prix Final TTC avec une remise de (<?php echo  formatPrice($totalRemise) ?> ) : <br> <strong> <?php echo formatPrice($priHTquanti - $totalRemise) ?></p>
       </div>
-      <div class="card-footer text-muted">
-        <input type="date" value="<?php echo date('Y-m-d'); ?>">
-      </div>
+    
   </div>
 
  
@@ -146,14 +159,19 @@ echo "la valeur de product est de  " . $product;
 
       <div class="card-body">
 
-        <h5 class="card-title"> Vous avez sélectionné : <?php nomTranspo() ?></h5>
+        <h5 class="card-title"> Vous avez sélectionné : <h1><?php nomTranspo() ?></h1></h5>
 
         <p class="card-text">Quantité commandé :
 
           <input type="number" class="form-control" name="quantite" value="<?php echo $quantite ?>" min="1" max="100">
 
         </p>
+        <div class="card-footer text-muted">
+        <input type="date" value="<?php echo date('Y-m-d'); ?>" readonly>
+      </div>
+
         <input type="hidden" name="product" value="<?php echo $product ?>">
+        
 
         <button class="btn btn-primary">Valider le transporteur</button>
 

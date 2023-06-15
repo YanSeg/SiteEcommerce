@@ -1,5 +1,9 @@
 <?php 
 session_start();
+require_once  "class/classdatabase.php";
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +54,7 @@ session_start();
             <a class="nav-link" href="http://localhost/SiteECommerce/listedesproduits.php"> Liste de nos produits <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Nous contacter</a>
+            <a class="nav-link" href=""http://localhost/SiteECommerce/classe_objet.php"">Nous contacter</a>
           </li>
           
           <li class="nav-item">

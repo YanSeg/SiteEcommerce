@@ -1,38 +1,37 @@
 <?php
+// function getProducts()
+// {
+//     return  [
 
-function getProducts()
-{
-    return  [
+//         "DOG" => [
+//             'nom' => "Dog",
+//             'prixTTC' => 300000,
+//             'weight' => 7000,
+//             'remise' => 3000,
+//             'image' => "http://localhost/SiteECommerce/image/dog.png"
+//         ],
 
-        "DOG" => [
-            'nom' => "Dog",
-            'prixTTC' => 300000,
-            'weight' => 7000,
-            'remise' => 3000,
-            'image' => "http://localhost/SiteECommerce/image/dog.png"
-        ],
-
-        "COC" => [
+//         "COC" => [
 
 
-            'nom' => "cocinelle",
-            'prixTTC' => 3000,
-            'weight' => 3,
-            'remise' => 300,
-            'image' => "http://localhost/SiteECommerce/image/coci.png"
+//             'nom' => "cocinelle",
+//             'prixTTC' => 3000,
+//             'weight' => 3,
+//             'remise' => 300,
+//             'image' => "http://localhost/SiteECommerce/image/coci.png"
 
-        ],
+//         ],
 
-        "CAT" => [
-            'nom' => "chat",
-            'prixTTC' => 170000,
-            'weight' => 3000,
-            'remise' => 30000,
-            'image' => "http://localhost/SiteECommerce/image/cat.png"
+//         "CAT" => [
+//             'nom' => "chat",
+//             'prixTTC' => 170000,
+//             'weight' => 3000,
+//             'remise' => 30000,
+//             'image' => "http://localhost/SiteECommerce/image/cat.png"
 
-        ]
-    ];
-}
+//         ]
+//     ];
+// }
 
 
 

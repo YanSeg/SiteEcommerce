@@ -1,9 +1,9 @@
 <?php
 
 
-
 require_once  "template/header.php";
 require_once  "my-functions.php";
+
 // require_once "lesproduits.php";
 
 // $products = getProducts();
@@ -30,23 +30,20 @@ require_once  "my-functions.php";
 // }
 
 
-
-
-
-$produits = GetTableBdd($db, $sqlquery_products);
-
+$db = new db();
+$produits =$db->GetTableBdd($sqlquery_products);
 var_dump($produits);
 
 
 
 ?>
-<form action="cart.php" method="POST">
+
 <div class="grid">
 
     <?php
     foreach ( $produits as $key => $product ) :  ?>
 
-
+<form action="cart.php" method="POST">
         <div class="produit">
 
             <h3> <?php echo ($product['name']) ?> </h3>
@@ -70,7 +67,7 @@ var_dump($produits);
 
                 <div class="form-group">
                     <label for="quantite">Quantité :</label>
-                    <input type="number" min="0" max="100" class="form-control" id="quantite" name="quantite[]" placeholder="Entrez la quantité">
+                    <input type="number" min="0" max="100" class="form-control" id="quantite" name="quantite" placeholder="Entrez la quantité">
                 </div>
 
                 <div class="boutoncommande">
@@ -82,20 +79,19 @@ var_dump($produits);
                 <input type="hidden" type=number name="prixTTC" id="prixTTC" value="<?php $product['prixTTC'] ?>">
                 <input type="hidden" type=texte name="prixRemise" id="prixRemise" value="<?php echo  formatPrice(discountedPrice($product['prixTTC'], $product['remise'])) ?>"> -->
 
-           
+            </form>
         </div>
     <?php endforeach;
     ?>
-     </form>
-      <h3> DEBUG </h3>
-      <?php var_dump ($key); ?>
+     
 </div>
 
 
 
 <?php
 
-$affichageTranspo = GetTableBdd($db, $sqlquery_transporters);
+
+$affichageTranspo = $db->GetTableBdd($sqlquery_transporters);
 var_dump($affichageTranspo);
 
 include  "template/footer.php";
