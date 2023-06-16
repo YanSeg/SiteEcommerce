@@ -25,6 +25,7 @@ class db  extends PDO {
     }
   }
 
+
   public function GetTableBdd($sqlquery)
   {
     $fonct = $this->db->prepare($sqlquery);

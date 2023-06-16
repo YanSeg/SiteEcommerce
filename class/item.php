@@ -5,18 +5,15 @@ require_once "lesproduits.php";
 
 
 
-// _____________________________________ Utilisation de la BDD
-
-
 class Item
 {
-    private int $idproducts;
-    private string $name;
-    private int $price;
-    private string $imageUrl;
-    private int $weight;
-    private int $stock;
-    private bool $available;
+    protected int $idproducts;
+    protected string $name;
+    protected int $price;
+    protected string $imageUrl;
+    protected int $weight;
+    protected int $stock;
+    protected bool $available;
 
     public function __construct(int $idproducts, string $name, int $price, string $imageUrl, int $weight, int $stock, bool $available)
     {
@@ -68,7 +65,7 @@ class Item
 
 function displayItem(Item $item): void
 {
-
+// include template/... 
     echo '<div>';
     echo '<h2>' . $item->getName() . '</h2>';
     echo '<p>Price: ' . $item->getPrice() . '</p>';
@@ -87,13 +84,13 @@ function displayItem(Item $item): void
 // class Catalogue
 // {
 
-//     private array $items;
+//     protected array $items;
 
 //     public function __construct()
 //     {
 //         $this->items = $this->fetchItemsFromDatabase();
 //     }
-//     private function fetchItemsFromDatabase(): array
+//     protected function fetchItemsFromDatabase(): array
 //     {
 //         // Logique pour récupérer les données des items depuis la base de données
 //         // Ici, nous simulons simplement un tableau d'objets Item

@@ -10,11 +10,13 @@ require_once "class/catalog.php";
 // displayItem($produitChien);
 
 
+// Pour afficher les items de mon catalogue quand dispkayCatalogue n'est pas une méthode mais une fonction.
 
-$catalog = new Catalogue (getProducts());
-$catalog ->display();
+// $catalog = new Catalogue (getProducts());
+// $catalog->displayCatalogue($catalog);
 
-
+$catalog = new Catalogue(getProducts());
+displayCatalogue($catalog);
 
 include "template/footer.php";
 

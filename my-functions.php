@@ -1,6 +1,46 @@
 <?php
 
 
+function getProducts()
+{
+    $sqlquery_products = "SELECT * FROM products";
+    $db = new db();
+    $items = $db->GetTableBdd($sqlquery_products);
+    return $items;
+}
+
+function getCustomers()
+{
+  $sqlquery_products = "SELECT * FROM customers";
+  $db = new db();
+  $items = $db->GetTableBdd($sqlquery_products);
+  return $items;
+}
+
+// function displayCatalogue(Catalogue $item)
+// {
+
+//     foreach ($this->items as $itemData) {
+//         $item = new Item(
+//             $itemData['idproducts'],
+//             $itemData['name'],
+//             $itemData['price'],
+//             $itemData['image_url'],
+//             $itemData['weight'],
+//             $itemData['stock'],
+//             $itemData['available'],
+
+//         );
+//         displayItem($item);
+//     }
+
+// }
+
+
+
+
+
+
 
 function formatPrice($prixEnCentimes)
 {
@@ -9,6 +49,9 @@ function formatPrice($prixEnCentimes)
 }
 
 // Pour l'afficher =>      formatPrice (1000);
+
+
+
 
 
 
@@ -25,11 +68,19 @@ echo formatPrice(priceExcludingVAT(3000)) . "<br>";*/
 
 
 
+
+
+
+
 function discountedPrice($prixTTC, $remise)
 {
   $montantRemise = $prixTTC - $remise;
   return $montantRemise;
 }
+
+
+
+
 
 
 function nomTranspo()
