@@ -38,7 +38,7 @@ class Catalogue
 
 
 
-function displayCatalogue(Catalogue $catalogue)
+function displayCatalogue (Catalogue $catalogue)
 {
     foreach ($catalogue->items as $itemData) {
         $item = new Item(
@@ -50,6 +50,7 @@ function displayCatalogue(Catalogue $catalogue)
             $itemData['stock'],
             $itemData['available']
         );
+    
         displayItem($item);
     }
 }

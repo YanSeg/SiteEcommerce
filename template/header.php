@@ -54,11 +54,11 @@ require_once  "class/classdatabase.php";
             <a class="nav-link" href="http://localhost/SiteECommerce/listedesproduits.php"> Liste de nos produits <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href=""http://localhost/SiteECommerce/classe_objet.php"">Nous contacter</a>
+            <a class="nav-link" href="http://localhost/SiteECommerce/affichageUnProduit.php">Affichage un produit</a>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">A propos</a>
+            <a class="nav-link disabled" href="http://localhost/SiteECommerce/customers.php"> Nos Clients</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

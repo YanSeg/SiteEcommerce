@@ -2,7 +2,7 @@
 require_once  "template/header.php";
 require_once  "my-functions.php";
 require_once "lesproduits.php";
-require_once "class/item.php";
+
 require_once "class/catalog.php";
 
 
@@ -12,11 +12,11 @@ require_once "class/catalog.php";
 
 // Pour afficher les items de mon catalogue quand dispkayCatalogue n'est pas une méthode mais une fonction.
 
-// $catalog = new Catalogue (getProducts());
-// $catalog->displayCatalogue($catalog);
-
-$catalog = new Catalogue(getProducts());
+$catalog = new Catalogue (getProducts());
 displayCatalogue($catalog);
+
+// $customers = new Catalogue (getCustomers());
+// displayCatalogue($customers);
 
 include "template/footer.php";
 

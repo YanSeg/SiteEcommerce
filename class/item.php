@@ -26,7 +26,6 @@ class Item
         $this->available = $available;
     }
 
-
     function getId(): int
     {
         return $this-> idproducts;
@@ -57,13 +56,18 @@ class Item
     {
         return $this->available;
     }
+
+
+    function setName($name): string{
+        return $this->name = $name;
+    }
 }
 
 
 
 
 
-function displayItem(Item $item): void
+function displayItem (Item $item): void
 {
 // include template/... 
     echo '<div>';
