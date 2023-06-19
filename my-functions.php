@@ -1,6 +1,6 @@
 <?php
 
-
+// ________________________________________  Mes fonctions de requêts SQL 
 function getProducts()
 {
     $sqlquery_products = "SELECT * FROM products";
@@ -16,31 +16,14 @@ function getCustomers()
   $items = $db->GetTableBdd($sqlquery_products);
   return $items;
 }
-
-// function displayCatalogue(Catalogue $item)
-// {
-
-//     foreach ($this->items as $itemData) {
-//         $item = new Item(
-//             $itemData['idproducts'],
-//             $itemData['name'],
-//             $itemData['price'],
-//             $itemData['image_url'],
-//             $itemData['weight'],
-//             $itemData['stock'],
-//             $itemData['available'],
-
-//         );
-//         displayItem($item);
-//     }
-
-// }
+// ______________________________________________________________________
 
 
 
 
 
 
+// ______________________________________________________________________
 
 function formatPrice($prixEnCentimes)
 {
@@ -52,24 +35,12 @@ function formatPrice($prixEnCentimes)
 
 
 
-
-
-
-
 function priceExcludingVAT($prixTTC, $tax = 20)
 {
   $montantHT = ((100 * $prixTTC) / (120));
   return $montantHT;
 }
-
-/*echo priceExcludingVAT(3000) . "<br>";
-
-echo formatPrice(priceExcludingVAT(3000)) . "<br>";*/
-
-
-
-
-
+// ______________________________________________________________________
 
 
 function discountedPrice($prixTTC, $remise)

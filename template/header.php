@@ -58,7 +58,7 @@ require_once  "class/classdatabase.php";
           </li>
           
           <li class="nav-item">
-            <a class="nav-link disabled" href="http://localhost/SiteECommerce/customers.php"> Nos Clients</a>
+            <a class="nav-link disabled" href="http://localhost/SiteECommerce/clients.php"> Nos Clients</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
